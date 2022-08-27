@@ -20,7 +20,6 @@ from rest_framework.routers import DefaultRouter
 from app import views
 
 router = DefaultRouter()
-router.register(r'user', views.UserViewSet, basename='user')
 router.register(r'club', views.ClubViewSet, basename='club')
 router.register(r'recruit', views.RecruitViewSet, basename='recruit')
 router.register(r'apply', views.ApplyViewSet, basename='apply')
@@ -34,4 +33,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+    path('user/', include('user.urls'))
 ]   

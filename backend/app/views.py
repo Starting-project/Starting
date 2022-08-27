@@ -38,25 +38,20 @@ from rest_framework.response import Response
 """
 
 
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    @action(detail=True)
-    def my_manager_accounts(self, request, pk=None):
-        user = self.get_object()
-        manager_queryset = user.manager_accounts.all()
-        serializer = ManagerSerializer(manager_queryset, many=True, fields=('id', 'club'))
-        return Response(serializer.data)
+# @action(detail=True)
+# def my_manager_accounts(self, request, pk=None):
+#     user = self.get_object()
+#     manager_queryset = user.manager_accounts.all()
+#     serializer = ManagerSerializer(manager_queryset, many=True, fields=('id', 'club'))
+#     return Response(serializer.data)
 
 
-    @action(detail=True)
-    def my_applies(self, request, pk=None):
-        user = self.get_object()
-        apply_queryset = user.applies.all()
-        serializer = ApplySerializer(apply_queryset, many=True, fields=('id', 'club_id', 'club_name', 'temp_save', 'deadline'))
-        return Response(serializer.data)
+# @action(detail=True)
+# def my_applies(self, request, pk=None):
+#     user = self.get_object()
+#     apply_queryset = user.applies.all()
+#     serializer = ApplySerializer(apply_queryset, many=True, fields=('id', 'club_id', 'club_name', 'temp_save', 'deadline'))
+#     return Response(serializer.data)
 
 class ClubViewSet(viewsets.ModelViewSet):
 

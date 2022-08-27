@@ -2,6 +2,7 @@ from dataclasses import field
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+from user.serializers import UserRegisterSerializer
 
 class ClubSerializer(serializers.ModelSerializer):
 
@@ -23,14 +24,6 @@ class ClubSerializer(serializers.ModelSerializer):
         model = Club
         fields = ['id', 'name', 'category', 'intro']
 
-    
-    
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email']
-
 
 class ManagerSerializer(serializers.ModelSerializer):
 
@@ -48,7 +41,7 @@ class ManagerSerializer(serializers.ModelSerializer):
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
 
-    user = UserSerializer()
+    user = UserRegisterSerializer()
     club = ClubSerializer(fields=('id', 'name'))
     class Meta:
         model = Manager
@@ -71,7 +64,7 @@ class ApplySerializer(serializers.ModelSerializer):
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
 
-    applier = UserSerializer(many=False, read_only=True)
+    applier = UserRegisterSerializer(many=False, read_only=True)
     club_id = serializers.ReadOnlyField(source='recruit.club.pk')
     club_name = serializers.ReadOnlyField(source='recruit.club.name')
     deadline = serializers.ReadOnlyField(source='recruit.deadline')

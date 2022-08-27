@@ -1,72 +1,9 @@
 
 from distutils.command.upload import upload
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import User
 
 # Create your models here.
-"""
-class ServiceUserManager(BaseUserManager):
-    def create_user(self, id, email, name, phone, department, gender=None, birth=None, password=None):
-        if not (id and email and name and phone and department):
-            raise ValueError("Users must have id, email, name, phone, department information")
-        
-        user = self.model(
-            id = id,
-            email = self.normalize_email(email),
-            name = name,
-            phone = phone,
-            department = department,
-            gender = gender,
-            birth = birth
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, id, email, name, phone, department, gender=None, birth=None, password=None):
-        if not (id and email and name and phone and department):
-            raise ValueError("Users must have id, email, name, phone, department information")
-        
-        user = self.model(
-            id = id,
-            email = self.normalize_email(email),
-            password = password,
-            name = name,
-            phone = phone,
-            department = department,
-            gender = gender,
-            birth = birth
-        )
-
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
-
-
-class ServiceUser(AbstractBaseUser):
-    id = models.IntegerField(primary_key=True)
-    email = models.EmailField(unique=True)
-    name = models.CharField()
-    phone = models.CharField(max_length=11)
-    department = models.CharField()
-    gender = models.CharField(blank=True)
-    birth = models.DateField(blank=True)
-
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-
-    objects = ServiceUserManager()
-
-    USERNAME_FIELD = 'id'
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['email', 'name', 'phone', 'department']
-
-    def __str__(self):
-        return self.id
-"""
-
-
 class Club(models.Model): 
     name = models.CharField(max_length=100, unique=True)
     category = models.CharField(max_length=20)
